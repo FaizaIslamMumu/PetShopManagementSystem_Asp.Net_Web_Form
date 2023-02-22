@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="My_ASP_Project.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.6.1.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#">
+                    <i class="fa fa-paw"> Pet Zone-BD </i>   
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" Width="100%">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Home.aspx" Text="Home" Value="Home"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/CatInfo.aspx" Text="Cats" Value="Cats"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/DogInfo.aspx" Text="Dogs" Value="Dogs"></asp:MenuItem>
+                        <asp:MenuItem Text="Birds" Value="Birds"></asp:MenuItem>
+                        <asp:MenuItem Text="Food Item" Value="Food Item"></asp:MenuItem>
+                        <asp:MenuItem Text="Accessories Item" Value="Accessories Item"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Category.aspx" Text="Category" Value="Category"></asp:MenuItem>
+                        <asp:MenuItem Text="Login" Value="Login"></asp:MenuItem>
+                        <asp:MenuItem Text="Register Now" Value="Register Now"></asp:MenuItem>
+                    </Items>
+                    <StaticHoverStyle BackColor="#FFCCCC" BorderColor="#993300" BorderStyle="Solid" />
+                    <StaticMenuItemStyle Font-Bold="True" ForeColor="#000099" HorizontalPadding="15px" Font-Size="Large" />
+                    <StaticMenuStyle BackColor="#FF9966" HorizontalPadding="80px" VerticalPadding="10px" />
+
+                </asp:Menu>
+            </nav>
+           
+        </div>
+
+        <div>
+            <asp:ContentPlaceHolder ID="main" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+     <asp:ContentPlaceHolder ID="footer" runat="server">
+            </asp:ContentPlaceHolder>
+   <footer>
+        <p class="text-capitalize text-center bg-dark text-white">&copy; All Rights Reserved. <a href="#"><i class="fa fa-facebook">FaceBook</i>
+            <i class="fa fa-google">Google</i>
+            <i class="fa fa-twitter">Twitter</i>
+            <i class="fa fa-instagram">Instagram</i>
+           </a></p>                                                                             
+    </footer>
+
+     <script src="Scripts/bootstrap.js"></script>
+</body>
+
+</html>

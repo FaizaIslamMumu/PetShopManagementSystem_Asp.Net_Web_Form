@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="petDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DogInfo">
+    <Key>
+      <PropertyRef Name="DogId" />
+    </Key>
+    <Property Name="DogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DogName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DogGender" Type="bit" />
+    <Property Name="categoryID" Type="int" Nullable="false" />
+    <Property Name="DogImage" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <Association Name="FK__DogInfo__categor__4E88ABD4">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="DogInfo" Type="Self.DogInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryID" />
+      </Principal>
+      <Dependent Role="DogInfo">
+        <PropertyRef Name="categoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="petDBModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DogInfo" EntityType="Self.DogInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__DogInfo__categor__4E88ABD4" Association="Self.FK__DogInfo__categor__4E88ABD4">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="DogInfo" EntitySet="DogInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

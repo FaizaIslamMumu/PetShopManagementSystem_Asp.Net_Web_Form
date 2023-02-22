@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="petDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DogInfoes" Relationship="Self.FK__DogInfo__categor__4E88ABD4" FromRole="Category" ToRole="DogInfo" />
+  </EntityType>
+  <EntityType Name="DogInfo">
+    <Key>
+      <PropertyRef Name="DogId" />
+    </Key>
+    <Property Name="DogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DogName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DogGender" Type="Boolean" />
+    <Property Name="categoryID" Type="Int32" Nullable="false" />
+    <Property Name="DogImage" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__DogInfo__categor__4E88ABD4" FromRole="DogInfo" ToRole="Category" />
+  </EntityType>
+  <Association Name="FK__DogInfo__categor__4E88ABD4">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="DogInfo" Type="Self.DogInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryID" />
+      </Principal>
+      <Dependent Role="DogInfo">
+        <PropertyRef Name="categoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="petDBContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="DogInfoes" EntityType="Self.DogInfo" />
+    <AssociationSet Name="FK__DogInfo__categor__4E88ABD4" Association="Self.FK__DogInfo__categor__4E88ABD4">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="DogInfo" EntitySet="DogInfoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

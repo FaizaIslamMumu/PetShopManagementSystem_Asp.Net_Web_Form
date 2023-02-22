@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="petDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DogInfo">
+          <Key>
+            <PropertyRef Name="DogId" />
+          </Key>
+          <Property Name="DogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DogName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DogGender" Type="bit" />
+          <Property Name="categoryID" Type="int" Nullable="false" />
+          <Property Name="DogImage" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__DogInfo__categor__4E88ABD4">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="DogInfo" Type="Self.DogInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="DogInfo">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="petDBModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DogInfo" EntityType="Self.DogInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DogInfo__categor__4E88ABD4" Association="Self.FK__DogInfo__categor__4E88ABD4">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="DogInfo" EntitySet="DogInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="petDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DogInfoes" Relationship="Self.FK__DogInfo__categor__4E88ABD4" FromRole="Category" ToRole="DogInfo" />
+        </EntityType>
+        <EntityType Name="DogInfo">
+          <Key>
+            <PropertyRef Name="DogId" />
+          </Key>
+          <Property Name="DogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DogName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DogGender" Type="Boolean" />
+          <Property Name="categoryID" Type="Int32" Nullable="false" />
+          <Property Name="DogImage" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__DogInfo__categor__4E88ABD4" FromRole="DogInfo" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK__DogInfo__categor__4E88ABD4">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="DogInfo" Type="Self.DogInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="DogInfo">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="petDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="DogInfoes" EntityType="Self.DogInfo" />
+          <AssociationSet Name="FK__DogInfo__categor__4E88ABD4" Association="Self.FK__DogInfo__categor__4E88ABD4">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="DogInfo" EntitySet="DogInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="petDBModelStoreContainer" CdmEntityContainer="petDBContext">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="petDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DogInfoes">
+            <EntityTypeMapping TypeName="petDBModel.DogInfo">
+              <MappingFragment StoreEntitySet="DogInfo">
+                <ScalarProperty Name="DogId" ColumnName="DogId" />
+                <ScalarProperty Name="DogName" ColumnName="DogName" />
+                <ScalarProperty Name="DogGender" ColumnName="DogGender" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="DogImage" ColumnName="DogImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="petDBModelStoreContainer" CdmEntityContainer="petDBContext">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="petDBModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DogInfoes">
+      <EntityTypeMapping TypeName="petDBModel.DogInfo">
+        <MappingFragment StoreEntitySet="DogInfo">
+          <ScalarProperty Name="DogId" ColumnName="DogId" />
+          <ScalarProperty Name="DogName" ColumnName="DogName" />
+          <ScalarProperty Name="DogGender" ColumnName="DogGender" />
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="DogImage" ColumnName="DogImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
